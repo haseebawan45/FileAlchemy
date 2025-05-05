@@ -1,0 +1,341 @@
+/* CSS Variables for Theme Colors */
+:root {
+    /* Light Mode Colors (Default) */
+    --bg-color: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    --text-color: #444;
+    --heading-color: #2C3E50;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --item-bg: rgba(255, 255, 255, 0.6);
+    --item-hover-bg: rgba(255, 255, 255, 0.75);
+    --accent-color: #3498DB;
+    --accent-light: #90caf9;
+    --brand-color: #FF8C00;  /* Orange for FileAlchemy brand colour */
+    --brand-color-light: #FFA500;  /* Light orange for gradients */
+    --btn-text-color: white;
+    --btn-hover-color: #2C3E50;
+    --outline-btn-bg: rgba(44, 62, 80, 0.1);
+    --outline-btn-color: #2C3E50;
+    --outline-btn-border: #2C3E50;
+    --footer-bg: rgba(255, 255, 255, 0.8);
+    --social-icon-bg: rgba(255, 255, 255, 0.8);
+    --social-icon-hover: #90caf9;
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(52, 152, 219, 0.3);
+    --input-focus-border: #3498DB;
+    --link-color: #3498DB;
+    --link-hover: #2C3E50;
+    --theme-toggle-bg: rgba(255, 255, 255, 0.8);
+    --theme-toggle-color: #444;
+    --theme-dropdown-bg: rgba(255, 255, 255, 0.9);
+    --theme-dropdown-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --theme-option-bg: transparent;
+    --theme-option-hover-bg: rgba(52, 152, 219, 0.1);
+    --theme-option-active-bg: rgba(52, 152, 219, 0.2);
+    
+    /* Animation control */
+    --transition-duration: 0.5s;
+    --transition-timing: ease;
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+    /* Background gradients */
+    --bg-color: linear-gradient(135deg, #1a1a2e, #16213e);
+    
+    /* Text colors - carefully selected for readability */
+    --text-color: #e6e6e6;
+    --heading-color: #ecf0f1;
+    
+    /* Card and container colors */
+    --card-bg: rgba(30, 39, 46, 0.85);
+    --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    
+    /* List items and interactive elements */
+    --item-bg: rgba(30, 39, 46, 0.6);
+    --item-hover-bg: rgba(30, 39, 46, 0.8);
+    
+    /* Accent colors - using lighter shades of blue for better visibility */
+    --accent-color: #60a5fa;  /* Sky blue - more visible in dark mode */
+    --accent-light: #60a5fa;  /* Lighter sky blue */
+    
+    /* Brand colors - keep orange consistent in dark mode but slightly brighter */
+    --brand-color: #FF9F1C;  /* Brighter orange for dark mode */
+    --brand-color-light: #FFBF69;  /* Lighter orange for dark mode */
+    
+    /* Button colors */
+    --btn-text-color: white;
+    --btn-hover-color: #1e40af;
+    --outline-btn-bg: rgba(236, 240, 241, 0.1);
+    --outline-btn-color: #ecf0f1;
+    --outline-btn-border: #ecf0f1;
+    
+    /* Footer */
+    --footer-bg: rgba(30, 39, 46, 0.8);
+    
+    /* Social icons */
+    --social-icon-bg: rgba(30, 39, 46, 0.8);
+    --social-icon-hover: #60a5fa;
+    
+    /* Form elements */
+    --input-bg: rgba(30, 39, 46, 0.9);
+    --input-border: rgba(96, 165, 250, 0.3);
+    --input-focus-border: #60a5fa;
+    
+    /* Link colors */
+    --link-color: #60a5fa;
+    --link-hover: #93c5fd;
+    
+    /* Theme controls */
+    --theme-toggle-bg: rgba(30, 39, 46, 0.8);
+    --theme-toggle-color: #ecf0f1;
+    --theme-dropdown-bg: rgba(30, 39, 46, 0.95);
+    --theme-dropdown-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    --theme-option-bg: transparent;
+    --theme-option-hover-bg: rgba(96, 165, 250, 0.1);
+    --theme-option-active-bg: rgba(96, 165, 250, 0.2);
+    
+    /* Status colors */
+    --error-color: #f87171;   /* Lighter red for dark mode */
+    --success-color: #4ade80; /* Lighter green for dark mode */
+}
+
+/* Global Theme Styles */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+/* Add a transition overlay for smooth theme changes */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-color);
+    z-index: -1;
+    transition: background var(--transition-duration) var(--transition-timing);
+}
+
+/* Theme Toggle Styles */
+.theme-control {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.theme-toggle {
+    background: var(--theme-toggle-bg);
+    color: var(--theme-toggle-color);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-duration) var(--transition-timing);
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle i {
+    font-size: 18px;
+    transition: transform var(--transition-duration) var(--transition-timing),
+                opacity var(--transition-duration) var(--transition-timing);
+}
+
+.light-icon, .dark-icon {
+    position: absolute;
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) var(--transition-timing);
+}
+
+.light-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0);
+}
+
+.dark-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+[data-theme="dark"] .light-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+[data-theme="dark"] .dark-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0);
+}
+
+/* Theme dropdown styles */
+.theme-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: var(--theme-dropdown-bg);
+    border-radius: 8px;
+    box-shadow: var(--theme-dropdown-shadow);
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    min-width: 120px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing);
+}
+
+.theme-control:hover .theme-dropdown,
+.theme-dropdown:hover {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.theme-option {
+    padding: 10px 15px;
+    background: var(--theme-option-bg);
+    border: none;
+    color: var(--text-color);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                color var(--transition-duration) var(--transition-timing);
+}
+
+.theme-option:hover {
+    background: var(--theme-option-hover-bg);
+}
+
+.theme-option.active {
+    background: var(--theme-option-active-bg);
+    font-weight: 500;
+}
+
+/* System preference based theme */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --bg-color: linear-gradient(135deg, #1a1a2e, #16213e);
+        --text-color: #e6e6e6;
+        --heading-color: #ecf0f1;
+        --card-bg: rgba(30, 39, 46, 0.85);
+        --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+        --item-bg: rgba(30, 39, 46, 0.6);
+        --item-hover-bg: rgba(30, 39, 46, 0.8);
+        --accent-color: #60a5fa;
+        --accent-light: #60a5fa;
+        --btn-text-color: white;
+        --btn-hover-color: #1e40af;
+        --outline-btn-bg: rgba(236, 240, 241, 0.1);
+        --outline-btn-color: #ecf0f1;
+        --outline-btn-border: #ecf0f1;
+        --footer-bg: rgba(30, 39, 46, 0.8);
+        --social-icon-bg: rgba(30, 39, 46, 0.8);
+        --social-icon-hover: #60a5fa;
+        --input-bg: rgba(30, 39, 46, 0.9);
+        --input-border: rgba(96, 165, 250, 0.3);
+        --theme-toggle-bg: rgba(30, 39, 46, 0.8);
+        --theme-toggle-color: #ecf0f1;
+        --theme-dropdown-bg: rgba(30, 39, 46, 0.95);
+        --theme-dropdown-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        --theme-option-bg: transparent;
+        --theme-option-hover-bg: rgba(96, 165, 250, 0.1);
+        --theme-option-active-bg: rgba(96, 165, 250, 0.2);
+    }
+}
+
+/* Responsive styles for theme controls */
+@media (max-width: 768px) {
+    .theme-control {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .theme-toggle {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .theme-control {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .theme-toggle {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .theme-toggle i {
+        font-size: 16px;
+    }
+}
+
+/* Add animation for the theme toggle button */
+.theme-toggle.animating {
+    animation: pulse 0.6s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+/* Transition overlay styling */
+#theme-transition-overlay {
+    pointer-events: none;
+}
+
+/* Animation for page elements */
+header, section, footer, .theme-control, .theme-dropdown,
+h1, h2, h3, h4, h5, h6, p, li, a, button, .big-cta {
+    transition: transform var(--transition-duration) var(--transition-timing),
+                opacity var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing),
+                color var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing),
+                border-color var(--transition-duration) var(--transition-timing);
+}
+
+/* Subtle transform animation when theme changes */
+html.theme-changing header, 
+html.theme-changing section,
+html.theme-changing .logo-container,
+html.theme-changing .social-icons,
+html.theme-changing .big-cta {
+    animation: sectionFade 0.6s ease-in-out;
+}
+
+@keyframes sectionFade {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.99); opacity: 0.9; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Styles for the FileAlchemy text brand */
+.webtext {
+    color: var(--brand-color);
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--brand-color), var(--brand-color-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: background var(--transition-duration) var(--transition-timing);
+} 

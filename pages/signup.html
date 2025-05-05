@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FileAlchemy</title>
+    <link rel="icon" type="image/x-icon" href="../assets/filealchemy.png">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/signup.css">
+</head>
+<body>
+    <header>
+        <h1>⚡ FileAlchemy</h1>
+        <p>Convert Any File with <span class="webtext">FileAlchemy</span></p>
+        <br>
+        <p>Having trouble signing up? Contact our support team at <br>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=thefilealchemy@gmail.com&su=Signup%20Issue&body=Hello%20FileAlchemy%20Support%20Team,%0D%0A%0D%0AI%20hope%20you%20are%20doing%20well.%20I%20am%20experiencing%20an%20issue%20while%20trying%20to%20sign%20up%20for%20an%20account.%0D%0A%0D%0A**Issue%20Details:**%0D%0A[Describe%20the%20issue,%20e.g.,%20verification%20email%20not%20received,%20username%20already%20taken,%20invalid%20password,%20etc.]%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20[Step%201]%0D%0A2.%20[Step%202]%0D%0A3.%20[Step%203]%0D%0A%0D%0A**Error%20Message%20(if%20any):**%0D%0A[Include%20any%20error%20messages%20shown%20on%20screen]%0D%0A%0D%0A**Email%20Used%20for%20Signup:**%0D%0A[Your%20email%20address%20entered%20during%20signup]%0D%0A%0D%0A**Additional%20Information:**%0D%0A[Include%20any%20relevant%20screenshots%20or%20notes]%0D%0A%0D%0AThank%20you%20for%20your%20help.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]">
+            Contact Signup Support
+            </a>
+        </p>
+        
+    </header>
+    <div class="container">
+        <div class="signup-box">
+            <h2>FileAlchemy</h2>
+            <h3>Create Your Account</h3>
+            <form id="signup-form">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Create a password">
+                </div>
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm your password">
+                </div>
+                <button type="submit" class="signup-btn">Sign Up</button>
+                <p class="login-text">Already have an account? <a href="./login.html">Login</a></p>
+                <p id="error-message" style="color: red; display: none;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../js/theme.js"></script>
+    <script type="module" src="../js/signup.js"></script>
+</body>
+</html>

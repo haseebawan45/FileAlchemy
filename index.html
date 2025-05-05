@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FileAlchemy - Your Ultimate File Conversion Solution</title>
+    <link rel="icon" type="image/x-icon" href="./assets/filealchemy.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="theme-control">
+        <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-sun light-icon"></i>
+            <i class="fas fa-moon dark-icon"></i>
+        </button>
+        <div class="theme-dropdown">
+            <button class="theme-option" data-theme="light">Light</button>
+            <button class="theme-option" data-theme="dark">Dark</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="logo-container">
+            <img src="./assets/filealchemy.png" alt="FileAlchemy Logo" class="logo-img" width="60">
+            <h1>⚡ FileAlchemy</h1>
+        </div>
+        <p class="tagline">Transform Any File Format with <span class="webtext">FileAlchemy</span></p>
+        <p>Convert documents, images, audio, and video files instantly with our advanced conversion platform.</p>
+        <p>Whether you need to extract audio from videos, convert HEIC photos to other formats, or transform documents to different formats, FileAlchemy has you covered.</p>
+        <div class="buttons">
+            <a href="./pages/login.html" class="btn">Login</a>
+            <a href="./pages/signup.html" class="btn">Sign Up</a>
+        </div>
+    </header>
+
+    <section class="features">
+        <h2>Why Choose FileAlchemy?</h2>
+        <ul>
+            <li>📂 Convert between 50+ file formats with perfect accuracy</li>
+            <li>🎬 Extract high-quality audio from video files in multiple formats</li>
+            <li>📱 Full support for HEIC images from modern smartphones</li>
+            <li>🔒 Secure local processing - your files never leave your device</li>
+            <li>🚀 High-performance conversions with advanced algorithms</li>
+            <li>💡 Simple, intuitive interface with real-time progress tracking</li>
+            <li>💪 Preserve quality and dimensions during all conversions</li>
+            <li>🔄 Multiple conversion methods with intelligent fallbacks</li>
+        </ul>
+    </section>
+
+    <section class="about-conversion">
+        <h2>Understanding File Conversion Technology</h2>
+        <p>
+            FileAlchemy uses cutting-edge technologies to deliver the highest quality file conversions. We employ a multi-layered approach for each file type:
+        </p>
+        <ul>
+            <li>✓ <strong>Native Libraries</strong> - Primary conversion using specialized libraries for maximum fidelity</li>
+            <li>✓ <strong>FFmpeg Integration</strong> - Professional-grade media processing for audio and video</li>
+            <li>✓ <strong>Format-Specific Algorithms</strong> - Tailored processing for each conversion type</li>
+            <li>✓ <strong>Intelligent Fallbacks</strong> - Multiple conversion methods ensure success even with challenging files</li>
+            <li>✓ <strong>Quality Preservation</strong> - Maintain original dimensions, resolution, and format attributes</li>
+        </ul>
+        <p>
+            Our platform supports a comprehensive range of file formats, including:
+        </p>
+        <div class="formats-container">
+            <div class="format-group">
+                <h3>PDF Conversions</h3>
+                <ul>
+                    <li><strong>PDF to DOCX</strong> - Convert PDFs to fully editable Word documents with preserved formatting</li>
+                    <li><strong>PDF to XLSX</strong> - Extract tables from PDFs to Excel spreadsheets for data analysis</li>
+                    <li><strong>PDF to PPTX</strong> - Transform PDFs into editable PowerPoint presentations</li>
+                    <li><strong>PDF to TXT</strong> - Extract plain text from PDFs for easy editing and searching</li>
+                    <li><strong>PDF to HTML</strong> - Convert PDFs to web-friendly HTML format with preserved layout</li>
+                </ul>
+            </div>
+            <div class="format-group">
+                <h3>Document Conversions</h3>
+                <ul>
+                    <li><strong>DOCX to PDF</strong> - Convert Word documents to universally accessible PDFs</li>
+                    <li><strong>DOCX to HTML</strong> - Transform Word documents to web-compatible format</li>
+                    <li><strong>DOCX to MD</strong> - Convert Word documents to Markdown for documentation</li>
+                    <li><strong>XLSX to CSV/JSON/XML</strong> - Transform Excel data to various interoperable formats</li>
+                    <li><strong>PPTX to PDF/Images/Video</strong> - Convert presentations to different shareable formats</li>
+                </ul>
+            </div>
+            <div class="format-group">
+                <h3>Image Processing</h3>
+                <ul>
+                    <li><strong>HEIC Support</strong> - Full conversion support for iPhone's HEIC format to JPG, PNG, WEBP, TIFF, BMP, GIF, ICO & PDF</li>
+                    <li><strong>Format Conversion</strong> - Convert between JPG, PNG, WEBP, TIFF, BMP, GIF, ICO with preserved quality</li>
+                    <li><strong>OCR Technology</strong> - Extract text from images using advanced optical character recognition</li>
+                    <li><strong>Image to PDF</strong> - Convert images to PDF documents with customizable layouts</li>
+                    <li><strong>Image Compression</strong> - Reduce file size while maintaining visual quality</li>
+                </ul>
+            </div>
+            <div class="format-group">
+                <h3>Video Processing</h3>
+                <ul>
+                    <li><strong>Audio Extraction</strong> - Extract audio from MP4, AVI, MOV, MKV, WEBM, FLV, WMV videos</li>
+                    <li><strong>Multiple Audio Formats</strong> - Convert to MP3, WAV, AAC, OGG, FLAC, OPUS, AC3, M4A, ALAC</li>
+                    <li><strong>Quality Preservation</strong> - Maintain original audio quality during extraction</li>
+                    <li><strong>Intelligent Processing</strong> - Uses MoviePy with FFmpeg fallback for reliable conversions</li>
+                </ul>
+            </div>
+            <div class="format-group">
+                <h3>Audio Processing</h3>
+                <ul>
+                    <li><strong>Format Conversion</strong> - Convert between all major audio formats</li>
+                    <li><strong>High Fidelity</strong> - Preserve audio quality across conversions</li>
+                    <li><strong>Multiple Audio Formats</strong> - Support for MP3, WAV, AAC, OGG, FLAC, OPUS, AC3, M4A, ALAC</li>
+                    <li><strong>Advanced Encoding</strong> - Optimal audio quality with format-specific settings</li>
+                </ul>
+            </div>
+            <div class="format-group">
+                <h3>Data Formats</h3>
+                <ul>
+                    <li><strong>CSV to JSON/XLSX</strong> - Convert tabular data to different formats</li>
+                    <li><strong>JSON to XML</strong> - Transform between structured data formats</li>
+                    <li><strong>XML to JSON</strong> - Convert XML documents to JSON for API use</li>
+                    <li><strong>Markdown Conversions</strong> - Transform Markdown to various document formats</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="conversion-technology">
+        <h2>How Our Conversion Technology Works</h2>
+        <div class="tech-details">
+            <div class="tech-detail">
+                <h3>🖼️ Image Conversion Technology</h3>
+                <p>Our image conversion engine uses a multi-layered approach:</p>
+                <ul>
+                    <li><strong>Python Imaging Library (PIL/Pillow)</strong> - Primary conversion engine for most image formats</li>
+                    <li><strong>Pillow-HEIF</strong> - Specialized support for HEIC/HEIF images from modern smartphones</li>
+                    <li><strong>FFmpeg</strong> - Advanced processing for challenging image conversions</li>
+                    <li><strong>Dimension & Quality Preservation</strong> - Intelligent algorithms maintain original image attributes</li>
+                    <li><strong>Multiple Fallback Methods</strong> - If one conversion approach fails, the system tries alternatives</li>
+                </ul>
+            </div>
+            <div class="tech-detail">
+                <h3>🎵 Audio Extraction Technology</h3>
+                <p>Our audio extraction system provides high-quality results through:</p>
+                <ul>
+                    <li><strong>MoviePy</strong> - Primary audio extraction from video files with high fidelity</li>
+                    <li><strong>FFmpeg</strong> - Professional-grade fallback for challenging video files</li>
+                    <li><strong>Direct Conversion</strong> - Format-specific optimizations for each audio format</li>
+                    <li><strong>Quality Preservation</strong> - Maintain original audio quality during extraction</li>
+                </ul>
+            </div>
+            <div class="tech-detail">
+                <h3>📄 Document Conversion Technology</h3>
+                <p>Our document conversion system utilizes:</p>
+                <ul>
+                    <li><strong>PyMuPDF</strong> - Advanced PDF manipulation and conversion</li>
+                    <li><strong>python-docx</strong> - Word document processing with formatting preservation</li>
+                    <li><strong>WeasyPrint</strong> - High-quality HTML to PDF conversion</li>
+                    <li><strong>Multiple Processing Engines</strong> - Format-specific processing for optimal results</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <h2>How FileAlchemy Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>Step 1: Upload Your File</h3>
+                <p>Select a file from your device or drag and drop it into our converter. We support files up to 100MB.</p>
+                <p>FileAlchemy accepts 50+ different file formats including HEIC images and all video formats.</p>
+            </div>
+            <div class="step">
+                <h3>Step 2: Choose Target Format</h3>
+                <p>The system will automatically detect your file type and show you all possible conversion options.</p>
+                <p>Select your desired output format from the available options.</p>
+            </div>
+            <div class="step">
+                <h3>Step 3: Convert & Download</h3>
+                <p>Our advanced algorithms will convert your file using the optimal conversion method.</p>
+                <p>Download your converted file instantly and enjoy high-quality results!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <h2>Why FileAlchemy Outperforms Other Converters</h2>
+        <p>Our platform stands out with these exceptional features:</p>
+        <ul>
+            <li>✅ <strong>Advanced HEIC Support</strong> – Convert iPhone's HEIC images with perfect quality preservation</li>
+            <li>✅ <strong>Multi-Method Conversion</strong> – Multiple conversion paths ensure success with any file</li>
+            <li>✅ <strong>Dimension Preservation</strong> – Images maintain original resolution and aspect ratio</li>
+            <li>✅ <strong>Full-Quality Audio Extraction</strong> – Extract high-fidelity audio from any video format</li>
+            <li>✅ <strong>Local Processing</strong> – All conversions happen on your device for maximum privacy</li>
+            <li>✅ <strong>Format-Specific Optimizations</strong> – Each conversion uses format-specific settings for best results</li>
+            <li>✅ <strong>Intelligent Fallbacks</strong> – If one method fails, the system tries alternatives</li>
+            <li>✅ <strong>Real-Time Progress Tracking</strong> – See the status of your conversion as it happens</li>
+            <li>✅ <strong>Seamless Audio Conversion</strong> – Convert between all major audio formats with perfect quality</li>
+        </ul>
+    </section>
+
+    <section class="quality-guarantee">
+        <h2>Our Quality Guarantee</h2>
+        <p>At FileAlchemy, we're committed to providing the highest quality conversion service. Every conversion uses multiple processing methods to ensure optimal results, and our system constantly adapts to handle even the most challenging files.</p>
+        <div class="cta-button">
+            <a href="./pages/login.html" class="big-cta">Try FileAlchemy Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <img src="./assets/filealchemy.png" alt="FileAlchemy Logo" width="30">
+                    <span>FileAlchemy</span>
+                </div>
+                <p>© 2025 FileAlchemy. All rights reserved.</p>
+            </div>
+            
+            <div class="footer-section">
+                <p>Questions? Contact our support team at 
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=thefilealchemy@gmail.com&su=Support%20Request&body=Hello%20FileAlchemy%20Support%20Team,%0D%0A%0D%0AI%20hope%20you%20are%20doing%20well.%20I%20am%20experiencing%20an%20issue%20with%20your%20service%20and%20would%20like%20assistance.%0D%0A%0D%0A**Issue%20Details:**%0D%0A[Describe%20your%20issue%20here]%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20[Step%201]%0D%0A2.%20[Step%202]%0D%0A3.%20[Step%203]%0D%0A%0D%0A**Expected%20Behavior:**%0D%0A[What%20you%20expected%20to%20happen]%0D%0A%0D%0A**Actual%20Behavior:**%0D%0A[What%20actually%20happened]%0D%0A%0D%0A**Additional%20Information:**%0D%0A[Include%20any%20relevant%20screenshots%20or%20error%20messages]%0D%0A%0D%0AThank%20you%20for%20your%20support.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]">
+                    Contact FileAlchemy Support
+                </a>
+                </p>
+                <p>Follow us on social media for updates and tips!</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/thefilealchemy/" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    
+                    <a href="https://www.facebook.com/filealchemy" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    
+                    <a href="https://twitter.com/thefilealchemy" class="social-icon" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/theme.js"></script>
+</body>
+</html>
