@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileAlchemy - Convert Anything!</title>
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/main_page.css">
+    <link rel="stylesheet" href="../css/theme.css">
+</head>
+
+<body>
+    <div class="theme-control">
+        <button id="theme-toggle" class="theme-toggle">
+            <i class="fas fa-sun light-icon"></i>
+            <i class="fas fa-moon dark-icon"></i>
+        </button>
+        <div class="theme-dropdown">
+            <button class="theme-option" data-theme="light">Light</button>
+            <button class="theme-option" data-theme="dark">Dark</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>⚡ FileAlchemy</h1>
+        <p>Convert Any File Instantly with <span class="webtext">FileAlchemy</span></p>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Convert Any File with Ease!</h2>
+        <p>FileAlchemy supports various formats, allowing you to quickly convert documents, images, spreadsheets,
+            presentations, and more!</p>
+    </section>
+
+    <!-- Upload Section -->
+    <section id="upload-section" class="upload-section">
+        <label for="fileInput" class="upload-box">
+            <span>📂 Drag & Drop or Click to Upload</span>
+            <input type="file" id="fileInput"
+                accept=".pdf,.docx,.xlsx,.pptx,.txt,.html,.jpg,.png,.csv,.json,.xml,.md,.mp4,.avi,.mov,.mkv,.webm,.flv,.wmv,.mp3,.wav,.aac,.ogg,.flac,.opus,.ac3,.m4a,.wma,.alac,.heic" />
+        </label>
+        <p id="fileInfo" style="display: none;"></p>
+
+        <!-- Upload Progress Bar (Initially Hidden) -->
+        <div id="uploadProgressContainer" class="progress-container" style="display: none;">
+            <div class="progress-info">
+                <span id="uploadStatus">Preparing upload...</span>
+                <span id="uploadPercentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div id="uploadProgressBar" class="progress-bar"></div>
+            </div>
+            <p id="uploadSpeed" class="upload-details"></p>
+        </div>
+
+        <!-- Conversion Options (Hidden Initially) -->
+        <div id="conversionOptions" class="conversion-grid" style="display: none;"></div>
+
+        <!-- Convert Button -->
+        <!-- <button class="convert-button" id="convertButton" disabled>⚡ Convert Now</button> -->
+    </section>
+
+    <!-- What We Offer Section -->
+    <section class="offer-section">
+        <h2>🔄 All Format Conversions We Offer</h2>
+        <p>Choose from a variety of file conversions tailored to your needs.</p>
+    </section>
+
+    <main class="conversion-main">
+        <!-- PDF Conversions -->
+        <section class="conversion-section pdf-conversion">
+            <h2>📑 PDF Conversions</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">📄 PDF ➝ Word</div>
+                <div class="conversion-square">📊 PDF ➝ Excel</div>
+                <div class="conversion-square">📽 PDF ➝ PowerPoint</div>
+                <div class="conversion-square">🖼 PDF ➝ Image</div>
+                <div class="conversion-square">📝 PDF ➝ Text</div>
+                <div class="conversion-square">🌍 PDF ➝ HTML</div>
+            </div>
+        </section>
+
+        <!-- Document Conversions -->
+        <section class="conversion-section doc-conversion">
+            <h2>📜 Document Conversions</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">📝 Word ➝ PDF</div>
+                <div class="conversion-square">🌍 Word ➝ HTML</div>
+                <div class="conversion-square">📜 Word ➝ Text</div>
+                <div class="conversion-square">📖 Word ➝ Markdown</div>
+
+                <div class="conversion-square">📊 Excel ➝ PDF</div>
+                <div class="conversion-square">🔢 Excel ➝ CSV</div>
+                <div class="conversion-square">📂 Excel ➝ JSON</div>
+                <div class="conversion-square">📄 Excel ➝ XML</div>
+
+                <div class="conversion-square">📽 PowerPoint ➝ PDF</div>
+                <div class="conversion-square">🖼 PowerPoint ➝ Images</div>
+                <div class="conversion-square">🎥 PowerPoint ➝ Video</div>
+            </div>
+        </section>
+
+        <!-- Image Processing -->
+        <section class="conversion-section image-conversion">
+            <h2>🖼 Image Processing</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">📄 JPG/PNG ➝ PDF</div>
+                <div class="conversion-square">🧐 JPG/PNG ➝ Text (OCR)</div>
+                <div class="conversion-square">🔄 Image Format Conversion</div>
+                <div class="conversion-square">📉 Image Compression</div>
+            </div>
+        </section>
+
+        <!-- Video Processing - NEW SECTION -->
+        <section class="conversion-section video-conversion">
+            <h2>🎬 Video Processing</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">🎵 Video ➝ MP3</div>
+                <div class="conversion-square">🔊 Video ➝ WAV</div>
+                <div class="conversion-square">🎧 Video ➝ AAC</div>
+                <div class="conversion-square">🎶 Video ➝ OGG</div>
+                <div class="conversion-square">🎼 Video ➝ FLAC</div>
+                <div class="conversion-square">🎹 Video ➝ OPUS</div>
+                <div class="conversion-square">🎤 Video ➝ AC3</div>
+                <div class="conversion-square">🎙 Video ➝ M4A</div>
+                <div class="conversion-square">🎺 Video ➝ ALAC</div>
+            </div>
+        </section>
+
+        <!-- Audio Processing - NEW SECTION -->
+        <section class="conversion-section audio-conversion">
+            <h2>🎧 Audio Processing</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">🎵 MP3 ➝ WAV/FLAC</div>
+                <div class="conversion-square">🔊 WAV ➝ MP3/OGG</div>
+                <div class="conversion-square">🎼 FLAC ➝ MP3/AAC</div>
+                <div class="conversion-square">🎶 OGG ➝ MP3/WAV</div>
+                <div class="conversion-square">🎹 AAC ➝ MP3/FLAC</div>
+                <div class="conversion-square">🎙 M4A ➝ MP3/WAV</div>
+                <div class="conversion-square">🎤 OPUS/AC3 ➝ MP3</div>
+                <div class="conversion-square">🎺 Any Audio Format</div>
+            </div>
+        </section>
+
+        <!-- Other Conversions -->
+        <section class="conversion-section misc-conversion">
+            <h2>📂 Other Conversions</h2>
+            <div class="conversion-grid">
+                <div class="conversion-square">📊 CSV ➝ Excel</div>
+                <div class="conversion-square">📂 CSV ➝ JSON</div>
+                <div class="conversion-square">🔢 JSON ➝ XML</div>
+                <div class="conversion-square">🌍 HTML ➝ PDF</div>
+                <div class="conversion-square">📝 HTML ➝ Word</div>
+                <div class="conversion-square">📖 Markdown ➝ HTML</div>
+                <div class="conversion-square">📖 Markdown ➝ Word</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 FileAlchemy. All rights reserved.</p>
+            <p>Questions? Contact our support team at <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=thefilealchemy@gmail.com&su=Support%20Request&body=Hello%20FileAlchemy%20Support%20Team,%0D%0A%0D%0AI%20hope%20you%20are%20doing%20well.%20I%20am%20experiencing%20an%20issue%20with%20your%20service%20and%20would%20like%20assistance.%0D%0A%0D%0A**Issue%20Details:**%0D%0A[Describe%20your%20issue%20here]%0D%0A%0D%0A**Steps%20to%20Reproduce:**%0D%0A1.%20[Step%201]%0D%0A2.%20[Step%202]%0D%0A3.%20[Step%203]%0D%0A%0D%0A**Expected%20Behavior:**%0D%0A[What%20you%20expected%20to%20happen]%0D%0A%0D%0A**Actual%20Behavior:**%0D%0A[What%20actually%20happened]%0D%0A%0D%0A**Additional%20Information:**%0D%0A[Include%20any%20relevant%20screenshots%20or%20error%20messages]%0D%0A%0D%0AThank%20you%20for%20your%20support.%0D%0A%0D%0ABest%20regards,%0D%0A[Your%20Name]">
+                    Contact FileAlchemy Support
+                </a>
+            </p>
+            <p>Follow us on social media for updates and tips!</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/thefilealchemy/" class="social-icon" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.facebook.com/filealchemy" class="social-icon" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="https://twitter.com/thefilealchemy" class="social-icon" target="_blank"
+                    rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script type="module" src="../js/main_page.js"></script>
+
+    <style>
+        /* Progress Bar Styles */
+        .progress-container {
+            margin: 15px auto;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 100;
+            /* Ensure it appears above other elements */
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .upload-details {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+
+        /* Ensure conversion options don't overlap */
+        #conversionOptions {
+            position: relative;
+            z-index: 10;
+            margin-top: 10px;
+            /* Add some space after the progress bar */
+        }
+
+        /* Adjustments for conversion elements */
+        .conversion-status {
+            z-index: 200;
+            /* Always on top */
+            position: fixed;
+        }
+
+        /* Dark Theme Adjustments */
+        [data-theme="dark"] .progress-bar-container {
+            background-color: #2a2a2a;
+        }
+
+        [data-theme="dark"] .upload-details {
+            color: #aaa;
+        }
+    </style>
+
+</body>
+
+</html>

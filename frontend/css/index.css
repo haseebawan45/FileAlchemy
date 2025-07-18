@@ -1,0 +1,592 @@
+/* Font Import for Poppins - adding but keeping original font fallbacks */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* General Styles - enhancing existing styles */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    transition: color var(--transition-duration) var(--transition-timing);
+    overflow-x: hidden; /* Prevents horizontal scrolling during transitions */
+}
+
+/* Header Enhancements - subtle improvements */
+header {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-light), var(--accent-color));
+    transition: background var(--transition-duration) var(--transition-timing);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    margin-bottom: 15px;
+    font-weight: 700;
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+/* Improved paragraphs */
+p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+/* Button Styling Improvements */
+.buttons .btn, .button, .guest-button .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 8px;
+    text-decoration: none;
+    color: var(--btn-text-color);
+    background-color: var(--accent-color);
+    border-radius: 8px;
+    transition: all var(--transition-duration) var(--transition-timing);
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.buttons .btn:hover, .button:hover, .guest-button .btn:hover {
+    background-color: var(--btn-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Primary Button */
+.primary-button, .guest {
+    background-color: var(--heading-color);
+}
+
+.primary-button:hover, .guest:hover {
+    background-color: var(--accent-color);
+}
+
+/* Section Styling */
+.features, .about-conversion, .how-it-works, .benefits, .quality-guarantee {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing);
+}
+
+/* Heading Styles */
+h2 {
+    font-size: 1.75rem;
+    color: var(--heading-color);
+    margin-bottom: 20px;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 8px;
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+    transition: background var(--transition-duration) var(--transition-timing);
+}
+
+h3 {
+    color: var(--heading-color);
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+/* List Styling - preserving original but enhancing */
+ul {
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+ul li {
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    background: var(--item-bg);
+    border-radius: 8px;
+    list-style: none;
+    position: relative;
+    transition: transform var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing),
+                border-left var(--transition-duration) var(--transition-timing);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+ul li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    border-left: 3px solid var(--accent-light);
+    background: var(--item-hover-bg);
+}
+
+/* Steps Section */
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.step {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background: var(--item-bg);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    transition: transform var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing),
+                border-top var(--transition-duration) var(--transition-timing);
+    position: relative;
+    border-top: 3px solid transparent;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    border-top-color: var(--accent-light);
+    background: var(--item-hover-bg);
+}
+
+.step h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.step p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+/* Footer Enhancement */
+footer {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    padding: 20px;
+    background: var(--footer-bg);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-section a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+    color: var(--accent-light);
+}
+
+/* Social Icons Styling */
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--social-icon-bg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all var(--transition-duration) var(--transition-timing);
+    color: var(--text-color);
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+    background-color: var(--social-icon-hover);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.4rem;
+    }
+
+    .features, .about-conversion, .how-it-works, .benefits, header, footer {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .step {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Special Text */
+.webtext {
+    background: linear-gradient(90deg, var(--brand-color), var(--brand-color-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    transition: background var(--transition-duration) var(--transition-timing);
+}
+
+/* CTA Button */
+.cta-button {
+    text-align: center;
+    margin: 30px 0 15px;
+}
+
+.big-cta {
+    padding: 16px 32px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--btn-text-color);
+    background-color: var(--accent-color);
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    transition: all var(--transition-duration) var(--transition-timing);
+    margin-top: 20px;
+}
+
+.big-cta:hover {
+    background-color: var(--btn-hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.big-cta i {
+    transition: transform var(--transition-duration) var(--transition-timing);
+}
+
+.big-cta:hover i {
+    transform: translateX(5px);
+}
+
+/* Format Groups */
+.formats-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.format-group {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    background: var(--item-bg);
+    border-radius: 10px;
+    box-shadow: var(--card-shadow);
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing);
+}
+
+.format-group h3 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.format-group ul {
+    padding-left: 0;
+}
+
+.format-group li {
+    font-size: 0.9rem;
+}
+
+/* Logo Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+    margin-right: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tagline */
+.tagline {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2C3E50;
+}
+
+/* Quality Guarantee Section */
+.quality-guarantee {
+    text-align: center;
+    background: var(--card-bg);
+    padding: 35px 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: var(--card-shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform var(--transition-duration) var(--transition-timing),
+                box-shadow var(--transition-duration) var(--transition-timing),
+                background-color var(--transition-duration) var(--transition-timing);
+}
+
+.quality-guarantee::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-light));
+    transition: background var(--transition-duration) var(--transition-timing);
+}
+
+.quality-guarantee h2 {
+    margin-bottom: 20px;
+}
+
+.quality-guarantee p {
+    max-width: 800px;
+    margin: 0 auto 25px;
+    font-size: 1.05rem;
+}
+
+/* Mobile Small Screens - Enhanced */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px 5px;
+    }
+
+    header, .features, .about-conversion, .how-it-works, .benefits, .quality-guarantee, footer {
+        padding: 15px 12px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    /* Logo and header content */
+    .logo-container {
+        margin-bottom: 12px;
+    }
+    
+    .logo-img {
+        width: 45px;
+        height: 45px;
+        margin-right: 10px;
+    }
+    
+    .tagline {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+    
+    /* Button layout for small screens */
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        max-width: 280px;
+        margin: 15px auto 0;
+    }
+    
+    .buttons .btn {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px; /* Better touch target */
+    }
+    
+    /* Features and benefits lists */
+    ul li {
+        padding: 12px 10px;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+    }
+    
+    /* Steps layout */
+    .steps {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .step {
+        padding: 15px 12px;
+        margin-bottom: 0;
+        width: 100%;
+    }
+    
+    /* Formats container */
+    .formats-container {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .format-group {
+        width: 100%;
+        padding: 15px 12px;
+    }
+    
+    /* CTA button */
+    .big-cta {
+        padding: 12px 20px;
+        font-size: 1rem;
+        width: 100%;
+        max-width: 280px;
+        border-radius: 8px;
+        height: 48px; /* Better touch target */
+    }
+    
+    /* Footer adjustments */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .footer-logo {
+        justify-content: center;
+    }
+    
+    .social-icons {
+        justify-content: center;
+        margin-top: 10px;
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 360px) {
+    body {
+        padding: 8px 4px;
+    }
+    
+    header, .features, .about-conversion, .how-it-works, .benefits, .quality-guarantee, footer {
+        padding: 12px 10px;
+        margin-bottom: 12px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    h3 {
+        font-size: 1rem;
+    }
+    
+    p {
+        font-size: 0.9rem;
+    }
+    
+    .logo-img {
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+    }
+    
+    .tagline {
+        font-size: 1rem;
+    }
+    
+    ul li {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    
+    .step, .format-group {
+        padding: 12px 10px;
+    }
+    
+    .big-cta {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+}

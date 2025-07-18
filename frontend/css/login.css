@@ -1,0 +1,332 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Import theme variables and general dark mode styling */
+@import url('./theme.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+header {
+    padding: 2rem;
+    backdrop-filter: blur(50px);
+    color: var(--heading-color);
+    transition: color 0.3s ease;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px var(--accent-color);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+/* Background with Soft Gradient */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Background already from theme.css */
+}
+
+/* Login Container */
+.container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+}
+
+/* Login Box with Glassmorphism */
+.login-box {
+    background: var(--form-bg);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(10px);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    color: var(--heading-color);
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: var(--heading-color);
+    margin-bottom: 25px;
+    font-weight: 400;
+}
+
+/* Input Styling */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.25);
+}
+
+/* Login Button */
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-color);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all var(--transition-duration) var(--transition-timing);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn:hover {
+    transform: translateY(-3px);
+    background-color: var(--btn-hover-color);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Signup link */
+.signup-text {
+    text-align: center;
+    margin: 20px 0;
+    color: var(--text-color);
+}
+
+.signup-text a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color var(--transition-duration) var(--transition-timing);
+}
+
+.signup-text a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--link-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-duration) var(--transition-timing);
+}
+
+.signup-text a:hover {
+    color: var(--link-hover);
+}
+
+.signup-text a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Divider */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.divider span {
+    padding: 0 10px;
+    color: var(--text-color);
+    font-size: 0.8rem;
+}
+
+.divider::before {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--divider-color);
+}
+
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 15px;
+        max-width: 95%;
+    }
+    
+    .login-box {
+        padding: 25px;
+    }
+    
+    h1 {
+        font-size: 2.2rem;
+    }
+    
+    h2 {
+        font-size: 1.7rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Small Mobile Devices - Enhanced */
+@media (max-width: 480px) {
+    body {
+        padding: 8px 5px;
+    }
+    
+    .container {
+        padding: 5px;
+        min-height: calc(100vh - 20px);
+    }
+    
+    header {
+        padding: 15px 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    
+    .login-box {
+        padding: 20px 15px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+    }
+    
+    h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    header p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 5px;
+    }
+    
+    .input-group {
+        margin-bottom: 12px;
+    }
+    
+    .input-group label {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+    
+    input {
+        padding: 12px 10px;
+        font-size: 16px; /* Prevents iOS zoom */
+        border-radius: 6px;
+    }
+    
+    .login-btn {
+        padding: 12px;
+        font-size: 1rem;
+        height: 48px; /* Better touch target */
+        border-radius: 6px;
+    }
+    
+    .divider {
+        margin: 12px 0;
+    }
+    
+    .signup-text, .guest-btn {
+        font-size: 0.9rem;
+    }
+    
+    .guest-btn {
+        height: 44px; /* Better touch target */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Extra Small Devices */
+@media (max-width: 360px) {
+    .login-box {
+        padding: 15px 12px;
+    }
+    
+    h1 {
+        font-size: 1.6rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    header p {
+        font-size: 0.85rem;
+    }
+    
+    input {
+        padding: 10px 8px;
+    }
+    
+    .login-btn, .guest-btn {
+        padding: 10px;
+    }
+}
+
+/* Change FileAlchemy color to orange */
+.webtext {
+    color: #FF8C00;
+    font-weight: 600;
+    background: linear-gradient(135deg, #FF8C00, #FFA500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
