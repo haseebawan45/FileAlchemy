@@ -28,7 +28,7 @@ The project is split into two main parts:
 6. Select the "main" branch and "/frontend" folder
 7. Click "Save"
 
-Your frontend will be available at `https://yourusername.github.io/filealchemy/`
+Your frontend will be available at `https://haseebawan45.github.io/FileAlchemy/`
 
 ### Backend Deployment (fly.io)
 
