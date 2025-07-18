@@ -17,7 +17,7 @@ The project is split into two main parts:
    ```bash
    git init
    git add .
-   git commit -m "Initial commit"
+   git commit -m "Initial commit".
    git branch -M main
    git remote add origin https://github.com/yourusername/filealchemy.git
    git push -u origin main
