@@ -21,7 +21,7 @@
 ### Deployment Configuration
 - Added `.github/workflows/deploy-frontend.yml` for GitHub Pages deployment
 - Created proper `.gitignore` file
-- Updated README.md with deployment instructions
+- Updated README.md with deployment instructions.
 
 ## Next Steps
 
