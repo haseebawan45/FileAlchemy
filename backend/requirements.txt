@@ -37,6 +37,7 @@ lxml>=4.9.2  # For enhanced XML processing and PPTX image extraction
 requests>=2.28.1  # For HTTP operations
 tqdm>=4.65.0  # For progress bars
 colorama>=0.4.6  # For colored terminal output
+psutil>=5.9.0  # For system resource monitoring
 
 # Optional Dependencies - Install as needed
 # pyngrok>=6.0.0  # For creating public URLs with --share option (pip install pyngrok)

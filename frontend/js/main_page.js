@@ -54,9 +54,21 @@ document.addEventListener("DOMContentLoaded", function () {
         const file = fileInput.files[0];
 
         if (file) {
+            // Check file size limit (25MB for Railway free tier)
+            const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25MB in bytes
+
+            if (file.size > MAX_FILE_SIZE) {
+                fileInfo.textContent = `File too large: ${formatFileSize(file.size)}. Maximum allowed size is 25MB.`;
+                fileInfo.style.display = "block";
+                fileInfo.style.color = "#ff5252";
+                conversionOptions.style.display = "none";
+                return;
+            }
+
             const fileExtension = file.name.split('.').pop().toLowerCase();
             fileInfo.textContent = `Selected file: ${file.name} (${formatFileSize(file.size)})`;
             fileInfo.style.display = "block";
+            fileInfo.style.color = ""; // Reset color
 
             if (conversionMapping[fileExtension]) {
                 conversionOptions.innerHTML = ""; // Clear previous options

@@ -47,6 +47,9 @@ import traceback
 import tempfile
 import subprocess
 from datetime import datetime, timedelta
+from resource_manager import get_resource_manager
+from optimized_converter import get_optimized_converter
+from conversion_queue import get_conversion_queue, get_queue_processor, ConversionRequest
 
 # Check if ffmpeg is available - needed for moviepy
 ffmpeg_available = False
@@ -160,10 +163,35 @@ app = FastAPI()
 # Create an API router
 api_router = APIRouter()
 
-# CORS Middleware - Update to allow requests from GitHub Pages
+# Startup event to initialize queue processor
+@app.on_event("startup")
+async def startup_event():
+    """Initialize services on startup"""
+    # Start the queue processor
+    asyncio.create_task(queue_processor.start_processing())
+    print("Queue processor started")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Cleanup on shutdown"""
+    queue_processor.stop_processing()
+    resource_manager.cleanup_resources()
+    print("Services shut down")
+
+# Railway environment configuration
+RAILWAY_ENVIRONMENT = os.getenv('RAILWAY_ENVIRONMENT', 'development')
+PORT = int(os.getenv('PORT', 8080))
+
+# CORS Middleware - Configure for Railway deployment
+allowed_origins = ["*"] if RAILWAY_ENVIRONMENT == 'development' else [
+    "https://*.railway.app",
+    "https://*.up.railway.app", 
+    "https://haseebawan45.github.io"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For development - restrict this in production
+    allow_origins=allowed_origins,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -181,6 +209,16 @@ ocr_reader = easyocr.Reader(['en'])
 # Global dict to store conversion progress
 conversion_progress = {}
 
+# Get resource manager instance
+resource_manager = get_resource_manager()
+
+# Get optimized converter instance
+optimized_converter = get_optimized_converter()
+
+# Get queue instances
+conversion_queue = get_conversion_queue()
+queue_processor = get_queue_processor(resource_manager)
+
 # Define API endpoints
 @api_router.post("/convert/")
 async def convert_file(
@@ -195,8 +233,17 @@ async def convert_file(
         task_id = f"conversion_{int(time.time())}_{os.urandom(4).hex()}"
         conversion_progress[task_id] = {"progress": 0, "status": "Starting conversion"}
         
-        # Check file size (limit to 100MB as mentioned in the frontend)
-        MAX_FILE_SIZE = 100 * 1024 * 1024  # 100MB in bytes
+        # Check if we can process this request
+        estimated_memory = min(file_size // (1024 * 1024) * 2, 100)  # Estimate 2MB per MB of file, max 100MB
+        if not resource_manager.can_process_request(estimated_memory):
+            conversion_progress[task_id] = {
+                "progress": 100, 
+                "status": "Error: Server is at capacity. Please try again later."
+            }
+            return {"error": "Server is at capacity. Please try again later.", "task_id": task_id}
+        
+        # Check file size (limit to 25MB for Railway free tier)
+        MAX_FILE_SIZE = 25 * 1024 * 1024  # 25MB in bytes
         
         # Read a small chunk to initialize file reading
         content = await file.read(1024)
@@ -212,8 +259,8 @@ async def convert_file(
             # Check if exceeds maximum size
             if file_size > MAX_FILE_SIZE:
                 print(f"File too large: {file_size} bytes")
-                conversion_progress[task_id] = {"progress": 100, "status": "Error: File size exceeds maximum limit of 100MB"}
-                return {"error": "File size exceeds maximum limit of 100MB", "task_id": task_id}
+                conversion_progress[task_id] = {"progress": 100, "status": "Error: File size exceeds maximum limit of 25MB"}
+                return {"error": "File size exceeds maximum limit of 25MB", "task_id": task_id}
         
         # Reset the file position for subsequent reading
         await file.seek(0)
@@ -255,29 +302,94 @@ async def convert_file(
         
         converted_file_path = None
         
-        # Check if conversion is supported
-        if extension in conversion_functions and target_format in conversion_functions[extension]:
+        # Try optimized conversion methods first
+        optimized_func = None
+        if extension == "pdf":
+            optimized_func = optimized_converter.select_conversion_method("pdf", target_format)
+        elif extension in ["jpg", "jpeg", "png", "webp", "bmp", "tiff", "gif"]:
+            if target_format in ["jpg", "jpeg", "png", "webp", "bmp", "tiff", "gif"]:
+                optimized_func = lambda path, task_id=None: optimized_converter.streaming_image_convert(path, target_format, task_id)
+        elif extension == "xlsx":
+            optimized_func = optimized_converter.select_conversion_method("xlsx", target_format)
+        
+        if optimized_func:
+            # Create conversion request for queue
+            request = ConversionRequest(
+                task_id=task_id,
+                file_path=file_path,
+                convert_func=optimized_func,
+                estimated_memory_mb=estimated_memory,
+                priority=1
+            )
+            
+            # Try to add to queue
+            if conversion_queue.add_request(request):
+                conversion_progress[task_id] = {
+                    "progress": 0,
+                    "status": f"Queued for processing. Position: {conversion_queue.get_request_position(task_id)}"
+                }
+                return response_data
+            else:
+                conversion_progress[task_id] = {
+                    "progress": 100,
+                    "status": "Error: Server queue is full. Please try again later."
+                }
+                return {"error": "Server queue is full. Please try again later.", "task_id": task_id}
+        
+        # Fallback to original conversion functions
+        elif extension in conversion_functions and target_format in conversion_functions[extension]:
             # Get the conversion function
             convert_func = conversion_functions[extension][target_format]
             
-            # Start conversion in background task
-            background_tasks.add_task(
-                process_conversion,
+            # Create conversion request for queue
+            request = ConversionRequest(
+                task_id=task_id,
                 file_path=file_path,
                 convert_func=convert_func,
-                task_id=task_id
+                estimated_memory_mb=estimated_memory,
+                priority=1
             )
             
-            return response_data
-        # Special case for OCR
+            # Try to add to queue
+            if conversion_queue.add_request(request):
+                conversion_progress[task_id] = {
+                    "progress": 0,
+                    "status": f"Queued for processing. Position: {conversion_queue.get_request_position(task_id)}"
+                }
+                return response_data
+            else:
+                conversion_progress[task_id] = {
+                    "progress": 100,
+                    "status": "Error: Server queue is full. Please try again later."
+                }
+                return {"error": "Server queue is full. Please try again later.", "task_id": task_id}
+        # Special case for OCR - use optimized method
         elif target_format == "text (ocr)" and extension in ["jpg", "jpeg", "png", "webp", "bmp", "tiff"]:
-            background_tasks.add_task(
-                process_ocr,
+            # Use optimized OCR method
+            ocr_func = lambda path, task_id=None: optimized_converter.memory_efficient_ocr(path, task_id)
+            
+            # Create conversion request for queue
+            request = ConversionRequest(
+                task_id=task_id,
                 file_path=file_path,
-                task_id=task_id
+                convert_func=ocr_func,
+                estimated_memory_mb=estimated_memory,
+                priority=1
             )
             
-            return response_data
+            # Try to add to queue
+            if conversion_queue.add_request(request):
+                conversion_progress[task_id] = {
+                    "progress": 0,
+                    "status": f"Queued for processing. Position: {conversion_queue.get_request_position(task_id)}"
+                }
+                return response_data
+            else:
+                conversion_progress[task_id] = {
+                    "progress": 100,
+                    "status": "Error: Server queue is full. Please try again later."
+                }
+                return {"error": "Server queue is full. Please try again later.", "task_id": task_id}
         else:
             # Handle unsupported conversions
             conversion_progress[task_id] = {
@@ -299,7 +411,14 @@ async def convert_file(
 # Add this helper function for background processing
 async def process_conversion(file_path, convert_func, task_id):
     """Process the conversion in a background task and update progress"""
+    # Start conversion tracking
+    if not resource_manager.start_conversion(task_id):
+        conversion_progress[task_id] = {"progress": 100, "status": "Error: Server is at capacity"}
+        return
+    
     try:
+        # Register temp file for cleanup
+        resource_manager.register_temp_file(file_path)
         # Call the conversion function with task_id if supported
         import inspect
         sig = inspect.signature(convert_func)
@@ -348,10 +467,20 @@ async def process_conversion(file_path, convert_func, task_id):
         traceback_info = traceback.format_exc()
         print(f"Traceback: {traceback_info}")
         conversion_progress[task_id] = {"progress": 100, "status": f"Error: {str(e)}"}
+    finally:
+        # Always end conversion tracking and cleanup
+        resource_manager.end_conversion(task_id)
 
 async def process_ocr(file_path, task_id):
     """Process OCR in a background task and update progress"""
+    # Start conversion tracking
+    if not resource_manager.start_conversion(task_id):
+        conversion_progress[task_id] = {"progress": 100, "status": "Error: Server is at capacity"}
+        return
+    
     try:
+        # Register temp file for cleanup
+        resource_manager.register_temp_file(file_path)
         conversion_progress[task_id] = {"progress": 20, "status": "Processing OCR"}
         
         # Check if extract_text_from_image is async
@@ -378,6 +507,9 @@ async def process_ocr(file_path, task_id):
     except Exception as e:
         print(f"OCR error: {str(e)}")
         conversion_progress[task_id] = {"progress": 100, "status": f"Error: {str(e)}"}
+    finally:
+        # Always end conversion tracking and cleanup
+        resource_manager.end_conversion(task_id)
 
 # Add a new endpoint to download converted files
 @app.get("/download/{task_id}")
@@ -439,6 +571,32 @@ async def get_conversion_progress(task_id: str):
     if task_id in conversion_progress:
         return conversion_progress[task_id]
     return {"progress": 0, "status": "Task not found"}
+
+# Resource status endpoint
+@app.get("/resource-status")
+async def get_resource_status():
+    """Get current resource usage status"""
+    return resource_manager.get_status()
+
+# Queue status endpoint
+@app.get("/queue-status")
+async def get_queue_status():
+    """Get current queue status"""
+    return conversion_queue.get_queue_status()
+
+# Request position endpoint
+@app.get("/queue-position/{task_id}")
+async def get_queue_position(task_id: str):
+    """Get the position of a request in the queue"""
+    position = conversion_queue.get_request_position(task_id)
+    if position:
+        return {"task_id": task_id, "position": position}
+    return {"task_id": task_id, "position": None, "status": "not_in_queue"}
+
+# Health check endpoint for Railway
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy", "environment": RAILWAY_ENVIRONMENT}
 
 # Root path handler for index.html
 @app.get("/")
@@ -4706,9 +4864,9 @@ if __name__ == "__main__":
     
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="FileAlchemy - Your Ultimate Document Conversion Solution")
-    parser.add_argument('--host', type=str, default="127.0.0.1", 
-                        help="Host address to bind the server (default: 127.0.0.1, use 0.0.0.0 to allow external access)")
-    parser.add_argument('--port', type=int, default=8001, help="Port to bind the server (default: 8001)")
+    parser.add_argument('--host', type=str, default="0.0.0.0", 
+                        help="Host address to bind the server (default: 0.0.0.0 for Railway)")
+    parser.add_argument('--port', type=int, default=PORT, help=f"Port to bind the server (default: {PORT} from Railway)")
     parser.add_argument('--share', action='store_true', help="Create a public URL using ngrok (requires ngrok installation)")
     args = parser.parse_args()
     
@@ -4836,4 +4994,20 @@ if __name__ == "__main__":
                 print(f"\n❌ Failed to create public URL: {str(e)}")
                 print("Make sure ngrok is installed and properly configured")
     
-    print(f"\n{'='*50}")
+    print(f"\n{'='*50}")    
+
+    # Start the server
+    print(f"\nStarting FileAlchemy server...")
+    print(f"Environment: {RAILWAY_ENVIRONMENT}")
+    print(f"Host: {args.host}")
+    print(f"Port: {args.port}")
+    
+    # Run the server
+    uvicorn.run(
+        "server:app",
+        host=args.host,
+        port=args.port,
+        reload=False,  # Disable reload in production
+        access_log=True,
+        log_level="info"
+    )
